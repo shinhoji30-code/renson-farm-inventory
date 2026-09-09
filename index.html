@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RENSON FARM INVENTORY</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="brand">RENSON FARM</h1>
+                <p class="brand-subtitle">Inventory System</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-link active" data-page="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="add-receipt.html" class="nav-link" data-page="add-receipt">
+                    <span class="nav-icon">➕</span>
+                    <span>Add Receipt</span>
+                </a>
+                <a href="receipts.html" class="nav-link" data-page="receipts">
+                    <span class="nav-icon">📋</span>
+                    <span>Receipts</span>
+                </a>
+                <a href="reports.html" class="nav-link" data-page="reports">
+                    <span class="nav-icon">📈</span>
+                    <span>Reports</span>
+                </a>
+                <a href="settings.html" class="nav-link" data-page="settings">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <h2>Dashboard</h2>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <span>👤 User</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-container">
+                <!-- Stats Cards -->
+                <section class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-content">
+                            <h3>Total Expenses</h3>
+                            <p class="stat-value" id="totalExpenses">₱0.00</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">📄</div>
+                        <div class="stat-content">
+                            <h3>Total Receipts</h3>
+                            <p class="stat-value" id="totalReceipts">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-content">
+                            <h3>This Month</h3>
+                            <p class="stat-value" id="thisMonth">₱0.00</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">📆</div>
+                        <div class="stat-content">
+                            <h3>This Year</h3>
+                            <p class="stat-value" id="thisYear">₱0.00</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Search and Filter -->
+                <section class="search-filter-section">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search receipts..." class="search-input">
+                        <button class="search-btn">🔍</button>
+                    </div>
+                    <div class="filter-controls">
+                        <input type="date" id="filterFromDate" class="filter-input" placeholder="From Date">
+                        <input type="date" id="filterToDate" class="filter-input" placeholder="To Date">
+                        <select id="filterCategory" class="filter-input">
+                            <option value="">All Categories</option>
+                            <option value="Feeds">Feeds</option>
+                            <option value="Fuel">Fuel</option>
+                            <option value="Farm Supplies">Farm Supplies</option>
+                            <option value="Equipment">Equipment</option>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Construction">Construction</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <button id="filterBtn" class="filter-btn">Apply Filter</button>
+                        <button id="clearFilterBtn" class="clear-filter-btn">Clear</button>
+                    </div>
+                </section>
+
+                <!-- Recent Transactions -->
+                <section class="recent-transactions">
+                    <h3>Recent Transactions</h3>
+                    <div class="transactions-container" id="transactionsContainer">
+                        <p class="no-data">No transactions yet. Add your first receipt!</p>
+                    </div>
+                </section>
+
+                <!-- Summary by Category -->
+                <section class="summary-section">
+                    <h3>Expense Summary by Category</h3>
+                    <div class="category-summary" id="categorySummary">
+                        <p class="no-data">No data available</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Image Preview Modal -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modalImage" src="" alt="Receipt Preview">
+        </div>
+    </div>
+
+    <script src="supabase.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // Initialize dashboard on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initDashboard();
+            // Refresh dashboard every 30 seconds
+            setInterval(initDashboard, 30000);
+        });
+    </script>
+</body>
+</html>
