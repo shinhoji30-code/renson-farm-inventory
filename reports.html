@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - RENSON FARM INVENTORY</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="brand">RENSON FARM</h1>
+                <p class="brand-subtitle">Inventory System</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-link" data-page="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="add-receipt.html" class="nav-link" data-page="add-receipt">
+                    <span class="nav-icon">➕</span>
+                    <span>Add Receipt</span>
+                </a>
+                <a href="receipts.html" class="nav-link" data-page="receipts">
+                    <span class="nav-icon">📋</span>
+                    <span>Receipts</span>
+                </a>
+                <a href="reports.html" class="nav-link active" data-page="reports">
+                    <span class="nav-icon">📈</span>
+                    <span>Reports</span>
+                </a>
+                <a href="settings.html" class="nav-link" data-page="settings">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <h2>Reports</h2>
+                </div>
+            </header>
+
+            <!-- Reports Container -->
+            <div class="reports-container">
+                <!-- Date Filter -->
+                <section class="report-filter">
+                    <h3>Report Filters</h3>
+                    <div class="filter-controls">
+                        <div class="filter-group">
+                            <label for="reportFromDate">From Date:</label>
+                            <input type="date" id="reportFromDate" class="filter-input">
+                        </div>
+                        <div class="filter-group">
+                            <label for="reportToDate">To Date:</label>
+                            <input type="date" id="reportToDate" class="filter-input">
+                        </div>
+                        <button id="reportFilterBtn" class="filter-btn">Generate Report</button>
+                        <button id="reportClearBtn" class="clear-filter-btn">Clear Filters</button>
+                    </div>
+                </section>
+
+                <!-- Summary Stats -->
+                <section class="report-stats">
+                    <div class="stat-card">
+                        <h3>Total Expenses</h3>
+                        <p class="stat-value" id="reportTotalExpenses">₱0.00</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Number of Receipts</h3>
+                        <p class="stat-value" id="reportTotalReceipts">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Average per Receipt</h3>
+                        <p class="stat-value" id="reportAverageAmount">₱0.00</p>
+                    </div>
+                </section>
+
+                <!-- Monthly Breakdown -->
+                <section class="report-section">
+                    <h3>Monthly Expenses</h3>
+                    <div class="report-table-container">
+                        <table class="report-table">
+                            <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th>Amount</th>
+                                    <th>Number of Receipts</th>
+                                </tr>
+                            </thead>
+                            <tbody id="monthlyTableBody">
+                                <tr>
+                                    <td colspan="3" class="no-data">No data available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Yearly Breakdown -->
+                <section class="report-section">
+                    <h3>Yearly Expenses</h3>
+                    <div class="report-table-container">
+                        <table class="report-table">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Amount</th>
+                                    <th>Number of Receipts</th>
+                                </tr>
+                            </thead>
+                            <tbody id="yearlyTableBody">
+                                <tr>
+                                    <td colspan="3" class="no-data">No data available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Category Breakdown -->
+                <section class="report-section">
+                    <h3>Expenses by Category</h3>
+                    <div class="report-table-container">
+                        <table class="report-table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th>Percentage</th>
+                                    <th>Number of Receipts</th>
+                                </tr>
+                            </thead>
+                            <tbody id="categoryTableBody">
+                                <tr>
+                                    <td colspan="4" class="no-data">No data available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Export Options -->
+                <section class="report-export">
+                    <button id="exportCSVBtn" class="btn-primary">📥 Export to CSV</button>
+                    <button id="printReportBtn" class="btn-secondary">🖨️ Print Report</button>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="supabase.js"></script>
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initReportsPage();
+        });
+    </script>
+</body>
+</html>
